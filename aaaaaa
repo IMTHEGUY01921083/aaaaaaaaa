@@ -2039,19 +2039,6 @@ TpTab:AddButton("Frost Gym",function()
     hrp.CFrame = CFrame.new(-2623, 7.36, -409)
 end)
 
--- ISLAND LIST
-local islands = {
-    CFrame.new(-37.1, 9.2, 1919), -- Tiny Island
-    CFrame.new(16.07, 9.08, 133.8), -- Main Island
-    CFrame.new(-8, 9, -169.2), -- Beach
-    CFrame.new(-8665.4, 17.21, -5792.9), -- Muscle King Gym
-    CFrame.new(-8543, 6.8, 2400), -- Jungle Gym
-    CFrame.new(4516, 991.5, -3856), -- Legends Gym
-    CFrame.new(-6759, 7.36, -1284), -- Infernal Gym
-    CFrame.new(2250, 7.37, 1073.2), -- Mythical Gym
-    CFrame.new(-2623, 7.36, -409) -- Frost Gym
-}
-
 local SpecsTab = window:AddTab("Spec")
 
 SpecsTab:AddLabel("————————————————————————————")
