@@ -2052,37 +2052,6 @@ local islands = {
     CFrame.new(-2623, 7.36, -409) -- Frost Gym
 }
 
--- AUTO RANDOM ISLAND TP
-getgenv().AutoIslandTP = false
-local lastIndex = nil
-
-TpTab:AddToggle("Auto Random Island TP", function(state)
-    getgenv().AutoIslandTP = state
-
-    if state then
-        task.spawn(function()
-            while getgenv().AutoIslandTP do
-                local character = player.Character or player.CharacterAdded:Wait()
-                local hrp = character:FindFirstChild("HumanoidRootPart")
-
-                if hrp then
-                    local randomIndex
-
-                    repeat
-                        randomIndex = math.random(1, #islands)
-                    until randomIndex ~= lastIndex
-
-                    lastIndex = randomIndex
-
-                    hrp.CFrame = islands[randomIndex]
-                end
-
-                task.wait(0.1)
-            end
-        end)
-    end
-end)
-
 local SpecsTab = window:AddTab("Spec")
 
 SpecsTab:AddLabel("————————————————————————————")
