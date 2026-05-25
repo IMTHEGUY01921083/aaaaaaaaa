@@ -1983,62 +1983,63 @@ titleLabel.TextSize = 14
 titleLabel.Font = Enum.Font.Merriweather 
 titleLabel.TextColor3 = Color3.fromRGB(173, 216, 230)
 
+local player = game.Players.LocalPlayer
+
 TpTab:AddButton("Tiny Island",function()
-    local char = player.Character or Player.CharacterAdded()
+    local char = player.Character or player.CharacterAdded:Wait()
     local hrp = char:WaitForChild("HumanoidRootPart")
     hrp.CFrame = CFrame.new(-37.1, 9.2, 1919)
 end)
 
 TpTab:AddButton("Main Island",function()
-    local char = player.Character or Player.CharacterAdded()
+    local char = player.Character or player.CharacterAdded:Wait()
     local hrp = char:WaitForChild("HumanoidRootPart")
     hrp.CFrame = CFrame.new(16.07, 9.08, 133.8)
 end)
 
 TpTab:AddButton("Beach",function()
-    local char = player.Character or Player.CharacterAdded()
+    local char = player.Character or player.CharacterAdded:Wait()
     local hrp = char:WaitForChild("HumanoidRootPart")
     hrp.CFrame = CFrame.new(-8, 9, -169.2)
 end)
 
 TpTab:AddButton("Muscle King Gym",function()
-    local char = player.Character or Player.CharacterAdded()
+    local char = player.Character or player.CharacterAdded:Wait()
     local hrp = char:WaitForChild("HumanoidRootPart")
     hrp.CFrame = CFrame.new(-8665.4, 17.21, -5792.9)
 end)
 
 TpTab:AddButton("Jungle Gym",function()
-    local char = player.Character or Player.CharacterAdded()
+    local char = player.Character or player.CharacterAdded:Wait()
     local hrp = char:WaitForChild("HumanoidRootPart")
     hrp.CFrame = CFrame.new(-8543, 6.8, 2400)
 end)
 
 TpTab:AddButton("Legends Gym",function()
-    local char = player.Character or Player.CharacterAdded()
+    local char = player.Character or player.CharacterAdded:Wait()
     local hrp = char:WaitForChild("HumanoidRootPart")
     hrp.CFrame = CFrame.new(4516, 991.5, -3856)
 end)
 
 TpTab:AddButton("Infernal Gym",function()
-    local char = player.Character or Player.CharacterAdded()
+    local char = player.Character or player.CharacterAdded:Wait()
     local hrp = char:WaitForChild("HumanoidRootPart")
     hrp.CFrame = CFrame.new(-6759, 7.36, -1284)
 end)
 
 TpTab:AddButton("Mythical Gym",function()
-    local char = player.Character or Player.CharacterAdded()
+    local char = player.Character or player.CharacterAdded:Wait()
     local hrp = char:WaitForChild("HumanoidRootPart")
     hrp.CFrame = CFrame.new(2250, 7.37, 1073.2)
 end)
 
 TpTab:AddButton("Frost Gym",function()
-    local char = player.Character or Player.CharacterAdded()
+    local char = player.Character or player.CharacterAdded:Wait()
     local hrp = char:WaitForChild("HumanoidRootPart")
     hrp.CFrame = CFrame.new(-2623, 7.36, -409)
 end)
 
-local player = game.Players.LocalPlayer
-
+-- ISLAND LIST
 local islands = {
     CFrame.new(-37.1, 9.2, 1919), -- Tiny Island
     CFrame.new(16.07, 9.08, 133.8), -- Main Island
@@ -2050,6 +2051,34 @@ local islands = {
     CFrame.new(2250, 7.37, 1073.2), -- Mythical Gym
     CFrame.new(-2623, 7.36, -409) -- Frost Gym
 }
+
+-- AUTO RANDOM TP
+_G.AutoIslandTP = false
+local lastIsland = nil
+
+TpTab:AddToggle("Auto Random Island TP", false, function(state)
+    _G.AutoIslandTP = state
+
+    if state then
+        task.spawn(function()
+            while _G.AutoIslandTP do
+                local char = player.Character or player.CharacterAdded:Wait()
+                local hrp = char:WaitForChild("HumanoidRootPart")
+
+                local randomIsland
+
+                repeat
+                    randomIsland = islands[math.random(1, #islands)]
+                until randomIsland ~= lastIsland
+
+                lastIsland = randomIsland
+                hrp.CFrame = randomIsland
+
+                task.wait(0.1)
+            end
+        end)
+    end
+end)
 
 local SpecsTab = window:AddTab("Spec")
 
